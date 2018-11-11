@@ -19,10 +19,11 @@ class GeneticAlgorithm:
     def evaluation(self):
         fitness_sum = sum(chromosome.fitness for chromosome in self._population)
         for chromosome in self._population:
-            chromosome.chance = chromosome.fitness / fitness_sum
+            chromosome.chance = chromosome.fitness / fitness_sum # Importante 
 
     def best(self):
         return max(self._population, key=lambda k: k.fitness)
+        #key - key function where each argument is passed, and comparison is performed based on its return value
 
     @property
     def alltime_best(self):
