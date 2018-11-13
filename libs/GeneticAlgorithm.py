@@ -1,5 +1,7 @@
 from libs.GeneticRoutines import selection, mutation, crossover
 import time
+from random import random, randint
+import math 
 
 
 class GeneticAlgorithm:
@@ -35,11 +37,16 @@ class GeneticAlgorithm:
 
     def next_generation(self):
         new_population = []
-        for _ in range(len(self._population)):
-            chromosome1 = selection(self._population)
-            chromosome2 = selection(self._population)
-            new_population.append(crossover(chromosome1, chromosome2))
-            mutation(new_population, self._mutation_rate)
+        #for _ in range(len(self._population)):
+        y = 0
+        while y < len(self._population):
+            x = random()
+            if x < 0.90: # Probabilidad de cruce
+                chromosome1 = selection(self._population)
+                chromosome2 = selection(self._population)
+                new_population.append(crossover(chromosome1, chromosome2))
+                mutation(new_population, self._mutation_rate)
+                y = y + 1 
         self._population = new_population
         self.evaluation()
 
@@ -59,12 +66,18 @@ class GeneticAlgorithm:
             self._generation += 1
         else:
             t0 = time.time()
+            count = 0
             while True:
                 pretender = self.best()
                 if pretender.fitness > self._fittest.raw_fitness:
                     self._fittest = pretender.copy()
-
+                    #count = 0
+                #elif pretender.fitness == self._fittest.raw_fitness:
+                    #count =+ 1
                 self._generation += 1
-                if time.time() - t0 >= seconds:
+                #or math.fabs(pretender.fitness - self._fittest.raw_fitness) > 0
+                if time.time() - t0 >= seconds or count >= self.generation*0.30: #condicion de parada
+                    print ("")
                     break
+
                 self.next_generation()

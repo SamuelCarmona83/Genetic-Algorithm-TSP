@@ -55,7 +55,7 @@ class Route:
     @property
     def fitness(self):
         distances = (City.distance(self._genes[i], self._genes[i + 1]) for i in range(-1, len(self._genes) - 1))
-        self._fitness = 1 / sum(distances)
+        self._fitness = 10 / sum(distances)
         return self._fitness
 
     @property
