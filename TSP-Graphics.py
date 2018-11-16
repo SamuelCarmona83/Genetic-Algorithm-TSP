@@ -27,9 +27,9 @@ def main():
     """ Main program """
 
     ''' Adjustable Parameters '''
-    population_size = 20
+    population_size = 40
     mutation_rate = 0.01
-    skipped_frames = 108  # recommended: values between 100 and 1000
+    skipped_frames = 60#108 predf  # recommended: values between 100 and 1000
 
     ''' Cities '''
     poland = Country()
@@ -65,7 +65,7 @@ def main():
             if event.type == pygame.QUIT:
                 refresh = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE :
                     pause = True
                     while pause:
                         event2 = pygame.event.wait()

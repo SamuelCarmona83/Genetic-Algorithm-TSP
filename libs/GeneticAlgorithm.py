@@ -67,17 +67,24 @@ class GeneticAlgorithm:
         else:
             t0 = time.time()
             count = 0
+            M1 = 0
+            M2 = 0
             while True:
                 pretender = self.best()
                 if pretender.fitness > self._fittest.raw_fitness:
                     self._fittest = pretender.copy()
+                    M1 = (math.fabs(pretender.fitness - self._fittest.raw_fitness)/self._fittest.raw_fitness)
                     #count = 0
                 #elif pretender.fitness == self._fittest.raw_fitness:
                     #count =+ 1
                 self._generation += 1
+                M2 = (math.fabs(pretender.fitness - self._fittest.raw_fitness)/self._fittest.raw_fitness)
                 #or math.fabs(pretender.fitness - self._fittest.raw_fitness) > 0
-                if time.time() - t0 >= seconds or count >= self.generation*0.30: #condicion de parada
-                    print ("")
+                #time.time() - t0 >= seconds or
+                #or (math.fabs(( M1 - M2 ))) < 0.015 and M1 != M2
+                if time.time() - t0 >= seconds  : #condicion de parada
+                    print("Ajuste :",(math.fabs(pretender.fitness - self._fittest.raw_fitness)/self._fittest.raw_fitness))
+                    print ("time to converge: ",time.time() - t0)
                     break
 
                 self.next_generation()

@@ -22,9 +22,9 @@ def main():
     print(*(city for city in poland.cities), sep=', ')
 
     #Tamaño de la poblacion 100 default , Mutation rate, Tipo de poblacion y tuplas tuple()
-    ga = GeneticAlgorithm(100, mutation_rate=0.5, ptype=Route, args=(poland.cities,))
+    ga = GeneticAlgorithm(20, mutation_rate=0.01, ptype=Route, args=(poland.cities,))
 
-    ga.run(seconds=20)# condicion de culminacion segundos o iteraciones reps=int
+    ga.run(seconds=90)# condicion de culminacion segundos o iteraciones reps=int
     fittest = ga.alltime_best
     best_fitness = fittest.fitness
     print('Best route:', fittest)
